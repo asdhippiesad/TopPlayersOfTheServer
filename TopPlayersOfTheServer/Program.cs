@@ -45,24 +45,18 @@ namespace TopPlayersOfTheServer
 
             Console.WriteLine("________");
             Console.WriteLine("Топ по силе: ");
-            Show(ShowSortTopStrongerPlayers(_players, topPLayers));
+            Show(GetTopStrengthPlayer(_players, topPLayers));
 
             Console.WriteLine("________");
             Console.WriteLine("Топ по уровню:");
-            Show(ShowSortLevelPlayers(_players, topPLayers));
+            Show(GetTopLevelPlayers(_players, topPLayers));
         }
 
-        private static IEnumerable<Player> ShowSortTopStrongerPlayers(IEnumerable<Player> player, int topPLayers)
-        {
-            var strongerPLayers = player.OrderByDescending(players => players.Power).Take(topPLayers).ToList();
+        private static IEnumerable<Player> GetTopStrengthPlayer(IEnumerable<Player> player, int topPLayers) =>
+            player.OrderByDescending(players => players.Power).Take(topPLayers);
 
-            return strongerPLayers;
-        }
-
-        private static IEnumerable<Player> ShowSortLevelPlayers(IEnumerable<Player> player, int topPLayers)
-        {
-            return player.OrderByDescending(players => players.Level).Take(topPLayers).ToList();
-        }
+        private static IEnumerable<Player> GetTopLevelPlayers(IEnumerable<Player> player, int topPLayers) =>
+            player.OrderByDescending(players => players.Level).Take(topPLayers);
 
         private void Show(IEnumerable<Player> players)
         {
